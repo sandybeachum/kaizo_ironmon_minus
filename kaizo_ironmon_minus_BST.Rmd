@@ -1,0 +1,28 @@
+---
+title: "BST-eez nuts"
+author: "Sandy Beach"
+date: "6/13/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+749 Pokemon as of ORAS/XY, megas/primals excluded from randomization. 
+The benchmark of 450 BST should get a person out of the bag with a runnable pokemon about 90% of the time, based on 5000 samples of 3 pokemon from the set of 749 (no replacement).
+
+```{r}
+pokedex = read.csv("pokemonbst.csv",header=TRUE)
+```
+```{r}
+set.seed = 72
+starters = data.frame(t(replicate(5000, sample(pokedex$Total, 3,F))))
+starters$max = pmax(starters$X1,starters$X2,starters$X3)
+starters$min = pmin(starters$X1,starters$X2,starters$X3)
+```
+```{r}
+quantile(starters$max, probs = c(0.35, 0.4, 0.45, 0.50, 0.55))
+quantile(starters$min, probs = c(0.45, 0.50, 0.55, 0.70, 0.80, 0.85, 0.87, 0.88, 0.89, 0.90, 0.91))
+```
+
