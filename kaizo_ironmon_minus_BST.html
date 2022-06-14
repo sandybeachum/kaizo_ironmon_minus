@@ -173,16 +173,16 @@ pre code {
 
 <p>749 Pokemon as of ORAS/XY, megas/primals excluded from randomization. The benchmark of 450 BST should get a person out of the bag with a runnable pokemon about 90% of the time, based on 5000 samples of 3 pokemon from the set of 749 (no replacement).</p>
 <pre class="r"><code>pokedex = read.csv(&quot;pokemonbst.csv&quot;,header=TRUE)</code></pre>
-<pre class="r"><code>set.seed = 72
+<pre class="r"><code>set.seed(72)
 starters = data.frame(t(replicate(5000, sample(pokedex$Total, 3,F))))
 starters$max = pmax(starters$X1,starters$X2,starters$X3)
 starters$min = pmin(starters$X1,starters$X2,starters$X3)</code></pre>
 <pre class="r"><code>quantile(starters$max, probs = c(0.35, 0.4, 0.45, 0.50, 0.55))</code></pre>
 <pre><code>## 35% 40% 45% 50% 55% 
-## 495 500 505 515 521</code></pre>
+## 494 498 500 510 520</code></pre>
 <pre class="r"><code>quantile(starters$min, probs = c(0.45, 0.50, 0.55, 0.70, 0.80, 0.85, 0.87, 0.88, 0.89, 0.90, 0.91))</code></pre>
 <pre><code>## 45% 50% 55% 70% 80% 85% 87% 88% 89% 90% 91% 
-## 305 310 320 355 405 420 430 440 446 452 458</code></pre>
+## 305 310 318 350 400 411 423 430 435 445 455</code></pre>
 
 
 
